@@ -1,21 +1,21 @@
 <?php
 
 namespace App\Config;
-
+require_once __DIR__ ."../../../vendor/autoload.php";
+use Dotenv\Dotenv;
 use PDO;
 use PDOException;
 
 class Dbh{
-    private $host = "localhost";
-    private $dbname = "careerlink1";
-    private $username = "root";
-    private $password = "";
+
     private $conn;
 
     public function connection()
     {
         try {
-            $this->conn = new PDO("mysql:host =" . $this->host . ";dbname:" . $this->dbname, $this->username , $this->password);
+            $dotenv = Dotenv::createImmutable(__DIR__);
+            $dotenv->load();
+            $this->conn = new PDO("mysql:host=".$_ENV["HOST"] . ";dbname=".$_ENV["DATABASE"], $_ENV["USER"],$_ENV["PASSWORD"]);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             echo "connection valide";
         } catch (PDOException $exeption) {
