@@ -8,7 +8,7 @@ use App\Config\Dbh;
 use PDO;
 
 class UserModel{
-    private $conn;
+    private $conn; 
 
     public function __construct() {
             $db = new Dbh();
