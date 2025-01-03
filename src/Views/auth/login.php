@@ -1,3 +1,21 @@
+<?php
+
+
+  require_once "../../../vendor/autoload.php";
+  use App\Controllers\Auth\AuthControllers;
+
+
+  if(isset($_POST["submit"]))
+  {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    $authController = new AuthControllers();
+    $authController->login($email, $password);
+  }
+?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -24,7 +42,7 @@
       <h2 class="tite text-3xl font-semibold text-center text-gray-800">Welcome Back!</h2>
       <p class="signuptext text-center text-gray-600">Please sign in to continue.</p>
 
-      <form id="login-form" action="../src/server/register.php" method="POST" class="space-y-6">
+      <form id="login-form" action="" method="POST" class="space-y-6">
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
           <input type="email" id="email" name="email" required
@@ -42,7 +60,7 @@
         </div>
 
         <div>
-          <button type="submit"
+          <button type="submit" name="submit"
             class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
             Sign In
           </button>
