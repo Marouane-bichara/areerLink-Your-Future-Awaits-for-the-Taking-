@@ -25,7 +25,6 @@ class Dbh{
     }
 }
 
-$dbcnnect = new Dbh();
-$dbcnnect->connection();
+
 
 ?>

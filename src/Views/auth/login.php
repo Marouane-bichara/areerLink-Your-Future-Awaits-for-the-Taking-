@@ -3,7 +3,7 @@
 
   require_once "../../../vendor/autoload.php";
   use App\Controllers\Auth\AuthControllers;
-
+use App\Controllers\Register\RegisterController;
 
   if(isset($_POST["submitSignIn"]))
   {
@@ -13,13 +13,16 @@
     $authController = new AuthControllers();
     $authController->login($email, $password);
   }
-  if(isset($_POST["submitSignUp"]))
+  if(isset($_POST["registeruser"]))
   {
     $nameRegister = $_POST["nameRegister"];
     $emailRegister = $_POST["emailRegister"];
     $roleRegister = $_POST["roleRegister"];
     $passwordRegister = $_POST["passwordRegister"];
     $confirmpasswordRegister = $_POST["confirm-passwordRegister"];
+
+    $registerController = new RegisterController();
+    $registerController->Register($nameRegister ,$emailRegister,$passwordRegister,$confirmpasswordRegister,$roleRegister);
   }
 
 ?>
