@@ -1,6 +1,5 @@
 <?php
 
-
   require_once "../../../vendor/autoload.php";
   use App\Controllers\Auth\AuthControllers;
 use App\Controllers\Register\RegisterController;
@@ -97,7 +96,6 @@ use App\Controllers\Register\RegisterController;
             <select id="role" name="roleRegister" required
               class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500 text-gray-900 focus:outline-none">
               <option value="candidate">Candidate</option>
-              <option value="admin">Admin</option>
               <option value="recruiter">Recruiter</option>
             </select>
             </div>
