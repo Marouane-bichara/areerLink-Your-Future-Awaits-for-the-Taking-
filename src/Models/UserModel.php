@@ -8,7 +8,7 @@ use App\Config\Dbh;
 use PDO;
 
 class UserModel{
-    private $conn;
+    private $conn; 
 
     public function __construct() {
             $db = new Dbh();
@@ -16,6 +16,8 @@ class UserModel{
     }
 
     public function findUserByEmailAndPassword($email, $password){
+        session_start();
+
         $query = "SELECT users.id , users.email , users.password , role.id as role_id , role.role_name as `role`
         FROM users join role on role.id = users.role where users.email = :email and users.password = :password";  
    
@@ -29,6 +31,9 @@ class UserModel{
          return null;
          }
          else{
+            // session_start();
+            $_SESSION["name"] = $row["role"];
+            $_SESSION["id"] = $row["id"];
             $role = new Role($row["role_id"], $row["role"]);
             return new User($row['id'],$row["email"],$role,$row["password"]);
          }

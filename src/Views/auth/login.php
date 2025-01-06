@@ -1,11 +1,10 @@
 <?php
 
-
   require_once "../../../vendor/autoload.php";
   use App\Controllers\Auth\AuthControllers;
+use App\Controllers\Register\RegisterController;
 
-
-  if(isset($_POST["submit"]))
+  if(isset($_POST["submitSignIn"]))
   {
     $email = $_POST["email"];
     $password = $_POST["password"];
@@ -13,6 +12,18 @@
     $authController = new AuthControllers();
     $authController->login($email, $password);
   }
+  if(isset($_POST["registeruser"]))
+  {
+    $nameRegister = $_POST["nameRegister"];
+    $emailRegister = $_POST["emailRegister"];
+    $roleRegister = $_POST["roleRegister"];
+    $passwordRegister = $_POST["passwordRegister"];
+    $confirmpasswordRegister = $_POST["confirm-passwordRegister"];
+
+    $registerController = new RegisterController();
+    $registerController->Register($nameRegister ,$emailRegister,$passwordRegister,$confirmpasswordRegister,$roleRegister);
+  }
+
 ?>
 
 
@@ -60,14 +71,14 @@
         </div>
 
         <div>
-          <button type="submit" name="submit"
+          <button type="submit" name="submitSignIn"
             class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
             Sign In
           </button>
         </div>
       </form>
 
-      <form id="register-form" action="../src/server/register.php" method="POST" class="space-y-6 hidden">
+      <form id="register-form" action="" method="POST" class="space-y-6 hidden">
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
           <input type="text" id="name" name="nameRegister" required
@@ -79,6 +90,15 @@
           <input type="email" id="email" name="emailRegister" required
             class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500 text-gray-900 focus:outline-none">
         </div>
+
+        <div>
+            <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+            <select id="role" name="roleRegister" required
+              class="mt-2 block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 placeholder-gray-500 text-gray-900 focus:outline-none">
+              <option value="candidate">Candidate</option>
+              <option value="recruiter">Recruiter</option>
+            </select>
+            </div>
 
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
@@ -93,7 +113,7 @@
         </div>
 
         <div>
-          <button type="submit" name="registeruser" id="buttonRegister"
+          <button type="submitSignUp" name="registeruser" id="buttonRegister"
             class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
             Sign Up
           </button>
@@ -102,7 +122,7 @@
 
       <div class="text-center">
         <p class="text-sm text-gray-600">
-          <a href="#" id="toggle-link" onclick="toggleForm()" class="text-blue-600 hover:text-blue-500 font-semibold">Don't have an account? Sign Up</a>
+          <a href="#" id="toggle-link" onclick="toggleForm()"  class="text-blue-600 hover:text-blue-500 font-semibold">Don't have an account? Sign Up</a>
         </p>
       </div>
     </div>
