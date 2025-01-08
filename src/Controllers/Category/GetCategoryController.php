@@ -8,5 +8,12 @@ use App\Models\GetCategoryModel;
             $categories = $categoryModal->getcategoriesmodal();
             return $categories;
         }
+
+        public function numberofCategories()
+        {
+            $categoryModalnum = new GetCategoryModel();
+            $categoriesNums = $categoryModalnum->getNumberOfCategories();
+            return $categoriesNums;
+        }
     }
 ?>

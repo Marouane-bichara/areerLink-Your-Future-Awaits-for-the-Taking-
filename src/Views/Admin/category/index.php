@@ -11,9 +11,9 @@ use App\Controllers\Category\GetCategoryController;
 
 
 
-if ((!isset($_SESSION["id"]) && !isset($_SESSION["role"]) && $_SESSION != "admin")) {
-    header("Location: ../auth/login.php");
-    exit();
+if ((!isset($_SESSION["idAdmin"]) && !isset($_SESSION["nameAdmin"]) && $_SESSION["nameAdmin"] != "admin")) {
+  header("Location: ../../auth/login.php");
+  exit();
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
   $logoutController = new LogoutController();
@@ -63,14 +63,10 @@ $categories = $getCategoriesResault->getCategoriesController();
       <nav class="mt-6">
         <a href="../home.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a>
         <a href="./index.php" class="block py-2.5 px-4 rounded bg-gray-700"><i class="fas fa-list-alt mr-2"></i>Categories</a>
-        <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-tags mr-2"></i>Tags</a>
-        <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-briefcase mr-2"></i>Jobs</a>
+        <a href="../tags/index.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-tags mr-2"></i>Tags</a>
+        <a href="../jobs/index.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-briefcase mr-2"></i>Jobs</a>
         <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-users mr-2"></i>Recruiters</a>
-        <form method="POST" class="mt-6">
-          <button type="submit" name="logout" class="block py-2.5 px-4 rounded bg-red-600 hover:bg-red-700 text-white w-full text-left">
-            <i class="fas fa-sign-out-alt mr-2"></i>Logout
-          </button>
-        </form>
+
       </nav>
     </div>
 
@@ -84,8 +80,8 @@ $categories = $getCategoriesResault->getCategoriesController();
       <nav>
         <a href="../home.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a>
         <a href="./index.php" class="block py-2.5 px-4 rounded bg-gray-700"><i class="fas fa-list-alt mr-2"></i>Categories</a>
-        <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-tags mr-2"></i>Tags</a>
-        <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-briefcase mr-2"></i>Jobs</a>
+        <a href="../tags/index.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-tags mr-2"></i>Tags</a>
+        <a href="../jobs/index.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-briefcase mr-2"></i>Jobs</a>
         <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-users mr-2"></i>Recruiters</a>
         <form method="POST" class="mt-6">
           <button type="submit" name="logout" class="block py-2.5 px-4 rounded bg-red-600 hover:bg-red-700 text-white w-full text-left">

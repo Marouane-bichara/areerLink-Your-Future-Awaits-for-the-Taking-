@@ -4,10 +4,11 @@
 
 session_start();
 
+use App\Controllers\Category\GetCategoryController;
 use App\Controllers\Logout\LogoutController;
+use App\Controllers\Tags\GetTagsController;
 
- 
-if ((!isset($_SESSION["id"]) && !isset($_SESSION["role"]) && $_SESSION != "admin")) {
+if ((!isset($_SESSION["idAdmin"]) && !isset($_SESSION["nameAdmin"]) && $_SESSION["nameAdmin"] != "admin")) {
     header("Location: ../auth/login.php");
     exit();
 }
@@ -15,6 +16,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
   $logoutController = new LogoutController();
   $logoutController->logoutController();
 }
+
+
+$countcatgegory = new GetCategoryController();
+$numberOfCategories = $countcatgegory->numberofCategories();
+
+
+$getTagsResault = new GetTagsController();
+$numberTags = $getTagsResault->numberofCategories(); 
+
 ?>
 
 <!DOCTYPE html>
@@ -43,8 +53,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
       <nav class="mt-6">
         <a href="./home.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a>
         <a href="./category/index.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-list-alt mr-2"></i>Categories</a>
-        <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-tags mr-2"></i>Tags</a>
-        <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-briefcase mr-2"></i>Jobs</a>
+        <a href="./tags/index.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-tags mr-2"></i>Tags</a>
+        <a href="./jobs/index.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-briefcase mr-2"></i>Jobs</a>
         <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-users mr-2"></i>Recruiters</a>
         <form method="POST" class="mt-6">
                     <button type="submit" name="logout" class="block py-2.5 px-4 rounded bg-red-600 hover:bg-red-700 text-white w-full text-left">
@@ -64,8 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
       <nav>
         <a href="./home.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-tachometer-alt mr-2"></i>Dashboard</a>
         <a href="./category/index.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-list-alt mr-2"></i>Categories</a>
-        <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-tags mr-2"></i>Tags</a>
-        <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-briefcase mr-2"></i>Jobs</a>
+        <a href="./tags/index.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-tags mr-2"></i>Tags</a>
+        <a href="./jobs/index.php" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-briefcase mr-2"></i>Jobs</a>
         <a href="#" class="block py-2.5 px-4 rounded hover:bg-gray-700"><i class="fas fa-users mr-2"></i>Recruiters</a>
         <form method="POST" class="mt-6">
                     <button type="submit" name="logout" class="block py-2.5 px-4 rounded bg-red-600 hover:bg-red-700 text-white w-full text-left">
@@ -83,16 +93,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
         <div class="bg-white p-4 rounded shadow">
           <h2 class="text-lg font-semibold text-gray-700"><i class="fas fa-briefcase mr-2"></i>Jobs</h2>
-          <p class="text-3xl font-bold text-gray-900">120</p>
+          <p class="text-3xl font-bold text-gray-900">22</p>
         </div>
         <div class="bg-white p-4 rounded shadow">
           <h2 class="text-lg font-semibold text-gray-700"><i class="fas fa-list-alt mr-2"></i>Categories</h2>
-          <p class="text-3xl font-bold text-gray-900">12</p>
+          <p class="text-3xl font-bold text-gray-900"><?php echo $numberOfCategories?></p>
         </div>
         <div class="bg-white p-4 rounded shadow">
           <h2 class="text-lg font-semibold text-gray-700"><i class="fas fa-users mr-2"></i>Recruiters</h2>
           <p class="text-3xl font-bold text-gray-900">45</p>
         </div>
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="text-lg font-semibold text-gray-700">
+                <i class="fas fa-tags mr-2"></i>Tags
+            </h2>
+            <p class="text-3xl font-bold text-gray-900"><?php echo $numberTags?></p>
+        </div>
+
       </div>
     </div>
   </div>

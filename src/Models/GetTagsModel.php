@@ -3,7 +3,7 @@ namespace App\Models;
 use App\Config\Dbh;
 use PDO;
 
-    class GetCategoryModel{
+    class GetTagsModel{
 
         private $conn;
 
@@ -12,9 +12,9 @@ use PDO;
             $this->conn = $db->connection();    
         }
        
-        public function getcategoriesmodal()
+        public function gettagsmodal()
         {
-            $query = "SELECT * from category";
+            $query = "SELECT * from tags";
 
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
@@ -22,9 +22,9 @@ use PDO;
             return $row;
         }
 
-        public function getNumberOfCategories()
+        public function getNumberOftags()
         {
-            $query = "SELECT count(name) FROM category";
+            $query = "SELECT count(name) FROM tags";
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
         

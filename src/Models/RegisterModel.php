@@ -27,11 +27,15 @@ class RegisterModel {
         if ($passwordRegister !== $confirmpasswordRegister) {
             return "InvalidRepeatPassword";
         }
+        if($passwordRegister < 8)
+        {
+            return "Passowrd is to short";
+        }
         return true;
     }
 
     public function registerTheUser($nameRegister, $emailRegister, $passwordRegister, $roleRegister) {
-        $role = 0; // Default role
+        $role = 0;
         if ($roleRegister === "admin") {
             $role = 1;
         } elseif ($roleRegister === "recruiter") {
@@ -41,14 +45,17 @@ class RegisterModel {
         } else {
             return "InvalidRole";
         }
+        $hashedPassword = password_hash($passwordRegister, PASSWORD_BCRYPT);
 
         $query = "INSERT INTO users (user_name, email, `password`, `role`)
                   VALUES (:user_name, :email, :password, :role);";
 
+
+
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(":user_name", $nameRegister);
         $stmt->bindParam(":email", $emailRegister);
-        $stmt->bindParam(":password", $passwordRegister);
+        $stmt->bindParam(":password", $hashedPassword);
         $stmt->bindParam(":role", $role, PDO::PARAM_INT);
 
         try {
